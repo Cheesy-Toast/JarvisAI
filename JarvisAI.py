@@ -1,5 +1,4 @@
 Prompt = input("Enter your prompt: ")
 
-if Prompt == "Goedemorgen" or Prompt == "Goedemiddag" or Prompt == "Goedenavond":
+if any(woord in Prompt.lower() for woord in ["goedemorgen", "goedemiddag", "goedenavond"]):
     print("Mooiii! Hoe gaat het met je?")
-    print("het lukt bij mij niet")
