@@ -5,4 +5,5 @@ while True:
     print("Hallo, waarmee kan ik je helpen vandaag")
  print("Ik ben Ali")
  print("Ik ben een AI die is ontworpen om te helpen met verschillende taken en vragen.")
+ print("ik ben douwe")
  
