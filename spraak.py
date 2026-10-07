@@ -32,8 +32,6 @@ def zeg(tekst):
     print("Jarvis:", tekst)
 
     if sys.platform == "darwin":
-        # Mac: de ingebouwde stem, dus geen extra installatie nodig.
-        # We proberen eerst een Nederlandse stem en vallen anders terug op de standaard.
         resultaat = subprocess.run(["say", "-v", "Xander", tekst], capture_output=True)
         if resultaat.returncode != 0:
             subprocess.run(["say", tekst], capture_output=True)

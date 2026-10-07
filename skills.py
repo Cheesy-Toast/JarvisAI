@@ -17,7 +17,6 @@ import requests
 
 NOTITIEBESTAND = "notities.txt"
 
-# Voor de weer-skill. Pas aan naar jullie eigen stad.
 STAD = "Groningen"
 LATITUDE = 53.22
 LONGITUDE = 6.57
@@ -41,8 +40,6 @@ WEBSITES = {
     "nos": "https://nos.nl",
 }
 
-
-# ---------- de skills ----------
 
 def begroeting(opdracht):
     return "Hoi! Waar kan ik mee helpen?"
@@ -149,9 +146,6 @@ def wikipedia(opdracht):
     except (requests.RequestException, ValueError):
         return "Ik kan Wikipedia nu niet bereiken. Heb je internet?"
 
-
-# ---------- de lijst met commando's ----------
-# (trefwoorden, functie). De volgorde telt: bovenaan wordt het eerst gecontroleerd.
 COMMANDOS = [
     (["hoe laat", "tijd"], tijd),
     (["datum", "welke dag", "hoeveel dag"], datum),
