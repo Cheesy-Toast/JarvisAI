@@ -3,3 +3,4 @@ def luister():
 
 def zeg(tekst):
     print("Jarvis:", tekst)
+    
