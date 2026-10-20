@@ -1,5 +1,4 @@
 SpeechRecognition
-sounddevice
-numpy
+PyAudio
+pyttsx3
 requests
-pyttsx3; sys_platform != "darwin"

@@ -7,13 +7,14 @@ Een nieuwe skill toevoegen gaat in twee stappen:
     1. Schrijf een functie die `opdracht` ontvangt en een string teruggeeft.
     2. Zet een regel in de lijst COMMANDOS onderaan dit bestand.
 """
+import json
 import random
 import re
 import webbrowser
 from datetime import datetime
 from urllib.parse import quote
-
-import requests
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 NOTITIEBESTAND = "notities.txt"
 
@@ -50,7 +51,7 @@ def naam(opdracht):
 
 
 def tijd(opdracht):
-    return datetime.now().strftime("Het is error %H:%M:%S.")
+    return datetime.now().strftime("Het is %H:%M")
 
 
 def datum(opdracht):
@@ -76,10 +77,11 @@ def weer(opdracht):
         f"?latitude={LATITUDE}&longitude={LONGITUDE}&current_weather=true"
     )
     try:
-        data = requests.get(url, timeout=5).json()["current_weather"]
+        with urlopen(url, timeout=5) as antwoord:
+            data = json.load(antwoord)["current_weather"]
         return (f"In {STAD} is het nu {round(data['temperature'])} graden "
                 f"en de wind is {round(data['windspeed'])} kilometer per uur.")
-    except (requests.RequestException, KeyError, ValueError):
+    except (OSError, TimeoutError, KeyError, ValueError):
         return "Ik kan het weer nu niet ophalen. Heb je internet?"
 
 
@@ -138,12 +140,14 @@ def wikipedia(opdracht):
     onderwerp = gevonden.group(1).strip()
     url = "https://nl.wikipedia.org/api/rest_v1/page/summary/" + quote(onderwerp.replace(" ", "_"))
     try:
-        antwoord = requests.get(url, headers={"User-Agent": "JarvisSchoolProject/1.0"}, timeout=5)
-        if antwoord.status_code != 200:
-            return f"Ik vind niets over {onderwerp}."
-        zinnen = antwoord.json().get("extract", "").split(". ")
+        verzoek = Request(url, headers={"User-Agent": "JarvisSchoolProject/1.0"})
+        with urlopen(verzoek, timeout=5) as antwoord:
+            data = json.load(antwoord)
+        zinnen = data.get("extract", "").split(". ")
         return ". ".join(zinnen[:2]).strip() or f"Ik vind niets over {onderwerp}."
-    except (requests.RequestException, ValueError):
+    except HTTPError:
+        return f"Ik vind niets over {onderwerp}."
+    except (URLError, TimeoutError, ValueError):
         return "Ik kan Wikipedia nu niet bereiken. Heb je internet?"
 
 COMMANDOS = [
