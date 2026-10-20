@@ -50,7 +50,7 @@ def naam(opdracht):
 
 
 def tijd(opdracht):
-    return datetime.now().strftime("Het is %H:%M")
+    return datetime.now().strftime("Het is error %H:%M:%S.")
 
 
 def datum(opdracht):
