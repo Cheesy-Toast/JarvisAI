@@ -10,21 +10,22 @@ luister() automatisch over op typen.
 """
 import subprocess
 import sys
+from importlib import import_module
 
 try:
-    import speech_recognition as sr
+    sr = import_module("speech_recognition")
 except ImportError:
     sr = None
 
 try:
-    import numpy as np
-    import sounddevice as sd
+    np = import_module("numpy")
+    sd = import_module("sounddevice")
 except (ImportError, OSError):
     np = None
     sd = None
 
 try:
-    import pyttsx3
+    pyttsx3 = import_module("pyttsx3")
 except ImportError:
     pyttsx3 = None
 
