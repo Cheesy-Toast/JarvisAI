@@ -165,7 +165,7 @@ COMMANDOS = [
     (["grap", "mop"], grap),
     (["wie ben jij", "hoe heet jij", "wat ben jij"], naam),
     (["hallo", "hoi", "goedemorgen", "goedemiddag", "hey"], begroeting),
-    (["wat zijn", "wie is", "wie was", "zoek", "vertel me over"], wikipedia),
+    (["wat zijn", "wie is", "wie was", "zoek", "vertel mij over", "vertel over", "vertel me wat over", "vertel mij "], wikipedia),
     (["nice", "lekker", "goed", "prachtig", "fijn", "top"], standaard),
 ]
 
