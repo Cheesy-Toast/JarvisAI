@@ -19,7 +19,6 @@ try:
 except ImportError:
     pyttsx3 = None
 
-# True = typen in plaats van praten (vangnet als de microfoon niet werkt)
 TEKSTMODUS = sr is None
 
 _herkenner = sr.Recognizer() if sr else None
