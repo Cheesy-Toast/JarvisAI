@@ -1,3 +1,4 @@
+cat > spraak.py << 'EOF'
 """spraak.py - de oren en de mond van Jarvis (Peter).
 
 Twee functies, meer hoeft de rest van het project niet te weten:
@@ -10,22 +11,22 @@ luister() automatisch over op typen.
 """
 import subprocess
 import sys
-from importlib import import_module
+import importlib
 
 try:
-    sr = import_module("speech_recognition")
+    sr = importlib.import_module("speech_recognition")
 except ImportError:
     sr = None
 
 try:
-    np = import_module("numpy")
-    sd = import_module("sounddevice")
+    np = importlib.import_module("numpy")
+    sd = importlib.import_module("sounddevice")
 except (ImportError, OSError):
     np = None
     sd = None
 
 try:
-    pyttsx3 = import_module("pyttsx3")
+    import pyttsx3
 except ImportError:
     pyttsx3 = None
 
@@ -130,3 +131,4 @@ def luister():
             TEKSTMODUS = True
 
     return input("Jij: ").lower().strip()
+EOF
