@@ -28,9 +28,7 @@ MAANDEN = ["januari", "februari", "maart", "april", "mei", "juni", "juli",
 
 GRAPPEN = [
     "Waarom nam de programmeur een ladder mee? Voor de high-level language.",
-    "Er zijn 10 soorten mensen: zij die binair begrijpen en zij die dat niet doen.",
     "Waarom houden programmeurs niet van de natuur? Te veel bugs.",
-    "Ik heb een grap over UDP, maar je krijgt hem misschien niet.",
 ]
 
 WEBSITES = {
@@ -39,6 +37,10 @@ WEBSITES = {
     "github": "https://github.com",
     "nu.nl": "https://www.nu.nl",
     "nos": "https://nos.nl",
+    "wikipedia": "https://nl.wikipedia.org",
+    "roblox": "https://www.roblox.com",
+    "alfa": "https://alfacollege.sharepoint.com/",
+    "itslearning": "https://alfa-college.itslearning.com/CourseCards"
 }
 
 
@@ -47,7 +49,7 @@ def begroeting(opdracht):
 
 
 def naam(opdracht):
-    return "Ik ben Jarvis, een assistent gemaakt in Python door ons projectteam."
+    return "Ik ben Jarvis, een assistent gemaakt in Python door ons projectteam, Douwe, Ali en Peter."
 
 
 def tijd(opdracht):
@@ -62,6 +64,8 @@ def datum(opdracht):
 def grap(opdracht):
     return random.choice(GRAPPEN)
 
+def standaard(opdracht):
+    return "Ja toch"
 
 def open_website(opdracht):
     for sitenaam, url in WEBSITES.items():
@@ -154,21 +158,21 @@ COMMANDOS = [
     (["hoe laat", "tijd"], tijd),
     (["datum", "welke dag", "hoeveel dag"], datum),
     (["weer", "temperatuur", "regen"], weer),
-    (["reken"], rekenen),
+    (["reken", "wat is",], rekenen),
     (["notities", "onthouden heb"], notities_lezen),
     (["onthoud"], notitie_opslaan),
     (["open", "ga naar"], open_website),
     (["grap", "mop"], grap),
     (["wie ben jij", "hoe heet jij", "wat ben jij"], naam),
-    (["hallo", "hoi", "goedemorgen", "goedemiddag"], begroeting),
-    (["wat is", "wat zijn", "wie is", "wie was", "zoek", "vertel me over"], wikipedia),
+    (["hallo", "hoi", "goedemorgen", "goedemiddag", "hey"], begroeting),
+    (["wat zijn", "wie is", "wie was", "zoek", "vertel mij over", "vertel over", "vertel me wat over", "vertel mij "], wikipedia),
+    (["nice", "lekker", "goed", "prachtig", "fijn", "top"], standaard),
 ]
 
 
 def verwerk(opdracht):
-    """Zoek het eerste commando waarvan een trefwoord in de opdracht zit."""
     opdracht = opdracht.lower()
     for woorden, functie in COMMANDOS:
         if any(woord in opdracht for woord in woorden):
             return functie(opdracht)
-    return "Dat snap ik niet. Probeer: tijd, datum, weer, grap, reken 5 plus 3 of open youtube."
+    return "Dat snap ik niet. Probeer iets simplers."
